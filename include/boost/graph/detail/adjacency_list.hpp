@@ -313,8 +313,7 @@ namespace boost {
         return *this;
       }
       self& operator=(self const& x) {
-        // NOTE: avoid 'Base::operator=(x);' broken on SGI MIPSpro (bug 55771 of Mozilla).
-        static_cast<Base&>(*this) = static_cast< Base const& >(x);
+        Base::operator=(static_cast< Base const& >(x));
         m_property = std::move(const_cast<self&>(x).m_property);
         return *this;
       }
